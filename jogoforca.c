@@ -4,7 +4,7 @@
 int main()
 {
 
-
+	
 	char palavrasecreta[20];
 
 	// função coloca a palavra melancia dentro do arrey.
@@ -15,28 +15,62 @@ int main()
 
 	int enforcou = 0; 
 
+	char chutes[26];
+
+	int tentativas = 0;
+
 	do{
 		
      
 		//função strlen irá varrer o array e 
 		//retornar o numero de posições preenchidas
 		for(int i = 0; i < strlen(palavrasecreta);i++){
-			printf("_ ");
+
+			int achou = 0;
+
+			printf("Estou vendo a palavrasecreta %d = %c\n" , i, palavrasecreta[i]);
+
+
+
+			for(int j = 0; j < tentativas; j++){
+
+				printf("-> chute %d = %c\n", j, chutes[j]);
+
+				if(chutes[j] == palavrasecreta[i]){
+
+					printf("---> chute correto \n");
+
+
+
+
+					achou = 1;
+
+					break;
+				}
+
+			}
+
+			if(achou){
+
+				printf("%c ",palavrasecreta[i]);
+
+			}else{
+
+				printf("_ ");
+			}
+
+			
          }
          printf("\n");
 
          char chute;
-		 scanf("%c",&chute);
+		 scanf(" %c",&chute);
+
+		 chutes[tentativas] = chute;
+		 tentativas++;
 
 
-			/*//compara se a palavra secreta na posição 'i' é igual ao chute 
-			if(palavrasecreta[i] == chute){
-
-				printf("Aposição %d tem essa letra!\n",i);
-
-
-             }*/
-
+			
 	}while(!acertou && !enforcou);
 
 		
