@@ -28,20 +28,11 @@ int main()
 
 			int achou = 0;
 
-			printf("Estou vendo a palavrasecreta %d = %c\n" , i, palavrasecreta[i]);
-
-
-
+			
 			for(int j = 0; j < tentativas; j++){
 
-				printf("-> chute %d = %c\n", j, chutes[j]);
-
+			
 				if(chutes[j] == palavrasecreta[i]){
-
-					printf("---> chute correto \n");
-
-
-
 
 					achou = 1;
 
