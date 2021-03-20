@@ -1,9 +1,25 @@
 #include<stdio.h>
 #include<string.h>
 
+void cabecalho(){
+
+printf("\n");
+printf("************************\n");
+printf("* Ola! Eu sou a forca. *\n");
+printf("************************\n");
+printf("\n\n");
+
+
+printf("Quer brincar?\n");
+printf("\n\n");
+
+
+}
+
+
 int main()
 {
-
+	cabecalho();
 	
 	char palavrasecreta[20];
 
