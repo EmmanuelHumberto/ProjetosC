@@ -1,31 +1,17 @@
 #include<stdio.h>
 
+	int main(){
 
-int main()
-
-{
-
-
-int contagem = 1;
-int soma;
-int resultado;
+	int soma;
+	int resultado;
 
 
-while(contagem < 100){
+	for (int i = 1; i<=100;i++){
 
+		soma = soma + i;	
 
-contagem++;	
+	 }
 
-soma = soma + contagem; 	
+	printf("%d\n",soma);
 
-
-//printf("%d\n",soma);
-
-
-
-
-}
-
-printf("%d\n",(contagem*(contagem+1))/2);
-
-}
+	}

@@ -2,25 +2,13 @@
 
 int main()
 {
-	
+	int i =0;
 
-	for (int i = 0; i <= 100; ++i)
-	{
+	while(i <= 100){
 		
 		printf("%d\n",i);
 
+		i++;
 
-
-
-		/* code */
-	}
-
-
-
-
-
-
-
-
-	return 0;
-}
+     }
+ } 
