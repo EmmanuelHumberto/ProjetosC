@@ -1,5 +1,6 @@
 #include<stdio.h>
 #include<string.h>
+#include "jogoforca.h"
 
 //variaveis globais
 
@@ -21,7 +22,7 @@ printf("************************\n");
 printf("\n\n");
 
 
-printf("Quer brincar?\n");
+printf("Vamos comerçar?\n");
 printf("\n\n");
 
 
