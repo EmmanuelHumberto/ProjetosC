@@ -1,6 +1,11 @@
 #include<stdio.h>
 #include<string.h>
 
+//variaveis globais
+
+char palavrasecreta[20];
+char chutes[26];
+int tentativas = 0;
 
 
 //*********************************************
@@ -25,28 +30,29 @@ printf("\n\n");
 //
 //Fuunção resposavel por checar se o chute 
 
-void chuta(char chutes[26], int *tentativas){
+void chuta(){
 
 char chute;
 scanf(" %c",&chute);
-chutes[(*tentativas)] = chute;
-(*tentativas)++;
+chutes[tentativas] = chute;
+tentativas++;
 
 }//fim void chuta
 
 //***********************************************
 
 
-int chutou(char letra, char chutes[26], int tentativas){
+int chutou(char letra,){
 
 	int achou = 0;
 
-			
+	//conta J se menor que tentativas 			
 	for(int j = 0; j < tentativas; j++){
 
-			
+		//compara se o chute na variavel J é igual a letra na posição i	
 		if(chutes[j] == letra[i]){
 
+			//se verdadeiro achou trorna-se true 
 			achou = 1;
 
 		break;
@@ -54,39 +60,21 @@ int chutou(char letra, char chutes[26], int tentativas){
 
 	 }//fim for tentativas
 
+//retorna o resultado da variálvel cachou 
 return achou;
  	 	
 }//fim int chuta.
 
 //*************************************************
 
-int main()
-
+void desenhaforca();
 {
-	cabecalho();
-	
-	char palavrasecreta[20];
 
-	// função coloca a palavra melancia dentro do arrey.
-	sprintf(palavrasecreta,"MELANCIA");
-
-
-	int acertou = 0;
-
-	int enforcou = 0; 
-
-	char chutes[26];
-
-	int tentativas = 0;
-
-	do{
-		
-     
-		//função strlen irá varrer o array e 
+//função strlen irá varrer o array e 
 		//retornar o numero de posições preenchidas
 		for(int i = 0; i < strlen(palavrasecreta);i++){
 
-		int achou = chutou(palavrasecreta, chutes, tentativas);
+		int achou = chutou(palavrasecreta[i]);
 
 			if(achou){
 
@@ -101,12 +89,38 @@ int main()
 			
          }//fim for palavrasecreta
 
-         printf("\n");
 
-         chuta(chutes,&tentativas);
+}//fimdesenhaforca
+
+
+//***************************************************************
+
+void definepalavra(){
+
+	sprintf(palavrasecreta, "MELANCIA");
+
+
+}//fim definepalavra
+
+int main()
+
+{
+	
+	int acertou = 0;
+	int enforcou = 0; 
+    
+    definepalavra();
+	cabecalho();
+
+	do{
+		
+     
+		 desenhaforca();
+         chuta();
 
  		
 	 }while(!acertou && !enforcou);
 
 }//fim main
+
    
