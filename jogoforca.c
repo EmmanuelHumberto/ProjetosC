@@ -1,19 +1,17 @@
 #include<stdio.h>
 #include<string.h>
-#include "jogoforca.h"
 #include<stdlib.h>
 #include<time.h>
+#include "jogoforca.h"
 
-//variaveis globais
+//Variaveis Globais 
 
-char palavrasecreta[20];
+//Passanso para variavel palavra secrta uma conatsnte char 
+char palavrasecreta[TAMANHO_PALAVRA];
 char chutes[26];
 int chutesdados = 0;
 
-
-//*********************************************
-
-//Função cabeçalho: imprimi o cabeçalho do jogo 
+//****************************************************
 
 void cabecalho(){
 
@@ -30,7 +28,7 @@ printf("\n\n");
 
 }//fim void cabecalho
 
-//
+//************************************************
 //Fuunção resposavel por receber o chute  
 
 void chuta(){
@@ -66,11 +64,31 @@ int chutou(char letra){
 //retorna o resultado da variálvel cachou 
 return achou;
  	 	
-}//fim chuta.
+}//fim chuta
 
-//*************************************************
+//*************************************************S
 
 void desenhaforca(){
+
+int erros = chuteserrados();
+
+//uso da função ifternário
+//(condicao ? valor verdadeiro : valor falso)
+
+printf("================================== \n");
+printf("  _______       \n");
+printf(" |/      |      \n");
+printf(" |      %c%c%c  \n", (erros>=1?'(':' '), 
+    (erros>=1?'_':' '), (erros>=1?')':' '));
+printf(" |      %c%c%c  \n", (erros>=3?'/':' '), 
+    (erros>=2?'|':' '), (erros>=3?'/': ' '));
+printf(" |       %c     \n", (erros>=2?'|':' '));
+printf(" |      %c %c   \n", (erros>=4?'/':' '), 
+    (erros>=4?'\\':' '));
+printf(" |              \n");
+printf("_|___           \n");
+printf("===================================\n");
+printf("\n\n");
 
 //função strlen irá varrer o array e 
 //retornar o numero de posições preenchidas
@@ -88,8 +106,9 @@ for(int i = 0; i < strlen(palavrasecreta);i++){
 
 
 	 }//fim else
-		
+
  	
+
 
  }//fim for palavrasecreta
 
@@ -99,6 +118,56 @@ for(int i = 0; i < strlen(palavrasecreta);i++){
 
 
 //***************************************************************
+void adicionapalavra(){
+
+char quer;
+
+printf("Deseja adicionar uma nova palavra no jogo?\n");
+printf("S Sim\n");
+printf("N Não\n");
+printf("\n");
+scanf(" %c",&quer);
+
+if(quer == 'S'){
+
+	char novapalavra[TAMANHO_PALAVRA];
+	printf("Qual a nova palavra?\n");
+	scanf("%s", novapalavra);	
+
+	FILE* f;
+
+    //Abrindo Arquivo 'r+' = leitura e escrita.
+	f = fopen("forcapalavras.txt", "r+");
+
+	if (f == 0){
+
+		printf("Palavra não dosponivel no banco de dados\n");
+		exit(1);
+	}
+
+	int qte;
+	fscanf(f, "%d", &qte);
+	qte++;
+
+	// Função responsavel por posiciona o cursor de leirura na posição zero
+	//([variavel 'F'], [posição curosr], [const de referencia da posição])
+	fseek(f, 0, SEEK_SET);
+
+	//sobrescreve dado na posição referenciada 
+	fprintf(f, "%d\n",qte);
+
+    // Função responsavel por posiciona o cursor de leirura no fim do aquivo
+	fseek(f, 0, SEEK_END);
+	fprintf(f, "\n%s", novapalavra);
+
+	fclose(f);
+
+ }
+
+}
+
+
+//****************************************************************
 
 void definepalavra(){
 
@@ -107,6 +176,11 @@ void definepalavra(){
 
 	//Abrindo Arquivo 'r' = leitura
 	f = fopen("forcapalavras.txt", "r");
+	if (f == 0){
+
+		printf("Palavra não dosponivel no banco de dados\n");
+		exit(1);
+	}
 
 
 
@@ -134,29 +208,31 @@ void definepalavra(){
 
 //****************************************************************
 
-int enforcou(){
 
-	int erros = 0;
+int chuteserrados() {
+    int erros = 0;
 
-	for (int i = 0; i < chutesdados; ++i){
+    for(int i = 0; i < chutesdados; i++) {
 
-		int existe = 0;
-	
-		for (int j = 0; j < strlen(palavrasecreta); ++j){
-			
-			if (chutes[i] == palavrasecreta[j]){
-				existe = 1;
-				break;
-			}
+        int existe = 0;
 
-		}
+        for(int j = 0; j < strlen(palavrasecreta); j++) {
+            if(chutes[i] == palavrasecreta[j]) {
+                existe = 1;
+                break;
+            }
+        }
 
-		if (!existe) erros++;
-	 }
+        if(!existe) erros++;
+    }
 
-		return erros >= 5;
- 
- }
+    return erros;
+}
+
+int enforcou() {
+    // usamos a função que acabamos de criar
+    return chuteserrados() >= 5;
+}
 
  //**************************************************************
 
@@ -191,5 +267,63 @@ int main()
 
  		
 	 }while(!ganhou() && !enforcou());	
+
+	 if(ganhou()){
+	 
+      printf("*******************************\n");
+      printf("✅ *  Parabéns, você ganhou!  *\n");
+      printf("*******************************\n");
+      printf("\n");
+      printf("       ___________      \n");
+      printf("       '._==_==_=_.'    \n");
+      printf("       .-\\:      /-.    \n");
+      printf("      | (|:.     |) |   \n");
+      printf("       '-|:.     |-'    \n");
+      printf("         \\::.    /      \n");
+      printf("          '::. .'       \n");
+      printf("           ) (          \n");
+      printf("          _.' '._       \n");
+      printf("        '-------'       \n");
+	  printf("                        \n");
+	  printf("\n\n");
+	  printf("Como premio voce poderá adicionar uma palavra ao jogo.\n\n");
+
+	  adicionapalavra();
+
+	}else{
+
+		printf("\n");
+        printf("*************************************\n");
+        printf(" ❌ * Você Perdeu! E foi Enforcado! *\n");
+        printf("*************************************\n");
+        printf("\n");
+
+        printf("A palavra secreta é ***%s***\n", palavrasecreta);
+
+
+
+        printf("\n\n");
+	 	printf("                              \n");
+		printf(" ███▀░░░░░░░░░░░░░░░░░▀████   \n");
+		printf(" ███│░░░░░░░░░░░░░░░░░░░│███  \n");
+		printf(" ██▌│░░░░░░░░░░░░░░░░░░░│▐██  \n");
+		printf(" ██░└┐░░░░░░░░░░░░░░░░░┌┘░██  \n");
+		printf(" ██░░└┐░░░░░░░░░░░░░░░┌┘░░██  \n");
+		printf(" ██░░┌┘▄▄▄▄▄░░░░░▄▄▄▄▄└┐░░██  \n");
+		printf(" ██▌░│██████▌░░░▐██☭ ███│ ██\n");
+		printf(" ███░│▐███▀▀░░▄░░▀▀███▌│░███  \n");
+		printf(" ██▀─┘░░░░░░░▐█▌░░░░░░░└─▀██  \n");
+		printf(" ██▄░░░▄▄▄▓░░▀█▀░░▓▄▄▄░░░▄██  \n");
+		printf(" ████▄─┘██▌░░░░░░░▐██└─▄████  \n");
+		printf(" █████░░▐█─┬┬┬┬┬┬┬─█▌░░█████  \n");
+		printf(" ████▌░░░▀┬┼┼┼┼┼┼┼┬▀░░░▐████  \n");
+		printf(" █████▄░░░└┴┴┴┴┴┴┴┘░░░▄█████  \n");
+		printf(" ███████▄░░░░░░░░░░░▄███████  \n");
+		printf("                              \n");
+		printf("\n\n");
+
+	 }
+
+	 printf("Fim do jogo!\n\n");
  }
    
