@@ -1,6 +1,8 @@
 #include<stdio.h>
 #include<string.h>
 #include "jogoforca.h"
+#include<stdlib.h>
+#include<time.h>
 
 //variaveis globais
 
@@ -78,17 +80,20 @@ for(int i = 0; i < strlen(palavrasecreta);i++){
 
 	if(achou){
 
-		printf(" %c ",palavrasecreta[i]);
+		printf("%c ",palavrasecreta[i]);
 
 	 }else{
 
 		printf("_ ");
 
-	 }//fim else
 
-			
+	 }//fim else
+		
+ 	
+
  }//fim for palavrasecreta
 
+ printf("\n");
 
 }//fimdesenhaforca
 
@@ -97,8 +102,33 @@ for(int i = 0; i < strlen(palavrasecreta);i++){
 
 void definepalavra(){
 
-	sprintf(palavrasecreta, "MELANCIA");
+	FILE* f;
 
+
+	//Abrindo Arquivo 'r' = leitura
+	f = fopen("forcapalavras.txt", "r");
+
+
+
+	int quantpalavras;
+
+	//função para ler arquivos: 
+	//[f = variavel que recebe o aquivo]
+
+	fscanf(f, "%d", &quantpalavras);
+
+
+    srand(time(0));
+
+    int randomico = rand()  % quantpalavras;
+
+    for (int i = 0; i < randomico; i++){
+
+    	fscanf(f, "%s", palavrasecreta);
+    }
+
+
+	fclose(f);
 
 }//fim definepalavra
 
