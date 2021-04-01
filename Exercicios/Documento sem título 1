@@ -1,0 +1,82 @@
+#include<stdio.h>
+
+char nome[30];
+char tipo[30];
+char id[30];
+char defeito[30];
+char origem[30];
+char data[30];
+int menu;
+
+char cadastrar()
+ {
+
+  printf("\n1-Digite o nome da peça:\n: ");
+  getchar();
+  scanf("\n%s",&nome[30]);
+  getchar();
+  printf("\n2-Digite o tipo da peça:\n: ");
+  scanf("\n%s",&tipo[30]);
+  printf("\n3-Digite a id da peça:\n: ");
+  scanf("\n%s",&id[30]);
+  printf("\n4-Digite o defeito da peça:\n: ");
+  getchar();
+  scanf("\n%s",&defeito[30]);
+  printf("\n5-Digite a origem da peça:\n: ");
+  getchar();
+  scanf("\n%s",&origem[30]);
+  printf("\n6-Digite a data de entrada da peça:\n: ");
+  getchar();
+  scanf("\n%s",&data[30]);
+  getchar();
+  printf("\n\nRelatório\n");
+  printf("\n1-Nome da peça: %s ",&nome[30]);
+  printf("\n2-Tipo da peça: %s ",&tipo[30]);
+  printf("\n3-ID da peça: %s ",&id[30]);
+  printf("\n4-Defeito da peça: %s ",&defeito[30]);
+  printf("\n5-Origem da peça: %s ",&origem[30]);
+  printf("\n6-Data de entrada da peça: %s ",&data[30]);
+  printf("\n\nDados Inseridos com sucesso!\n");
+  return 0;
+
+ }
+
+
+int cabecalho()
+ {
+
+  printf("\nSeja Bem Vinda(o)!!\n\nAproveita que a mamadeira ta cheeia!!\n..Grande funck...");
+  printf("\n\nAinda ontem chorei demais\n..Haviam muitos terraplanistas frequentando as escolas");
+  printf("\n\nDigite 1 para Cadastrar: \nDigite 2 para Sair:");
+  scanf("\n%d",&menu);
+
+  return 0;
+
+ }
+
+ int main()
+ {
+
+	cabecalho();
+
+
+ switch(menu)
+ {
+
+  case 1: menu=1;
+
+   cadastrar();
+
+  break;
+
+  case 2: menu=2;
+
+   printf("Fim do programa!!");
+
+  break;
+
+	}
+
+   return 0;
+ }
+
