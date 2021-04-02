@@ -1,28 +1,27 @@
 #include<stdio.h>
 #include<stdlib.h>
+#include"jogopcman.h"
 
 /*Declarando uma matrix de char. Os dois ** após o tipo da variável 
   decalra um ponteiro de ponteiro para char.
  */
-char** mapa;
 
-int linhas;
-int colunas;
+struct mapa m;
 
 void liberamapa(){
 
 
- 	for (int i = 0; i < linhas; ++i){
+ 	for (int i = 0; i < m.linhas; ++i){
      	/*Função free libera o espeçao de memoria aloacdo
      	   em mapa na posição i
      	 */
-     	free(mapa[i]);
+     	free(m.matriz[i]);
      	
      }
          /*Função free libera o espeçao de memoria aloacdo
      	    para mapa
      	  */
-     	free(mapa);
+     	free(m.matriz);
 
  }
 
@@ -33,15 +32,15 @@ void alocamapa(){
 	  * Variavel mapa recebe dinamicamente a qte de bytes necessarios para guaradar 
 	  	 as linhas do ariovo mapa.txt.
       */
-    mapa = malloc(sizeof(char*) * linhas);
+    m.matriz = malloc(sizeof(char*) * m.linhas);
 
      //percorre a qte de linhas no aquivo mapa.txt.
-    for (int i =0; i < linhas;i++){
+    for (int i =0; i < m.linhas;i++){
 
      	/*mapa na posição i irá alocar espço suficiente para caber a qte de byte
 		   necessários para guardar ponteiros de char.
      	 */
-     	mapa[i] = malloc(sizeof(char) * (colunas + 1));
+     	m.matriz[i] = malloc(sizeof(char) * (m.colunas + 1));
 
      }
  }
@@ -63,14 +62,14 @@ void lemapa(){
      	/*função para ler arquivos: 
 	 	 * [f = variavel que recebe o aquivo]
 	 	 */
-     	fscanf(f, "%d %d", &linhas, &colunas);
+     	fscanf(f, "%d %d", &(m.linhas), &(m.colunas));
 
  	 	alocamapa();
 
  	 	for (int i = 0; i < 5; ++i){
 
     	//lê o mapa na posição i
-     	fscanf(f, "%s", mapa[i]);	
+     	fscanf(f, "%s", m.matriz[i]);	
      	
      }
 
@@ -87,7 +86,7 @@ void imprimemapa(){
  	for (int i = 0; i < 5; ++i){
 
     	//imprime o mapa na posição i
-     	printf("%s\n", mapa[i]);
+     	printf("%s\n", m.matriz[i]);
 
      }
 
@@ -108,11 +107,11 @@ void move(char direcao){
 
 	//Acha a posição do foge foge
 
-	for (int i = 0; i < linhas; i++){
+	for (int i = 0; i < m.linhas; i++){
 
-		for (int j = 0; j < colunas; j++){
+		for (int j = 0; j < m.colunas; j++){
 
-			if (mapa[i][j] == '@'){
+			if (m.matriz[i][j] == '@'){
 
 				x =i;
 				y=j;
@@ -136,28 +135,28 @@ void move(char direcao){
 
 		// Caso a tecla 'a' seja pressionada o simbolo '@' 'se desloca uma posição para a esquerda.
 		case 'a':
-		mapa[x][y-1] = '@';
+		m.matriz[x][y-1] = '@';
 		break;
 
 		// Caso a tecla 'd' seja pressionada o simbolo '@' 'se desloca uma posição para a direita.
 		case 'w':
-		mapa[x-1][y] = '@';
+		m.matriz[x-1][y] = '@';
 		break;
 
 		// Caso a tecla 'w' seja pressionada o simbolo '@' 'se desloca uma posição para a cima.
 		case 's':
-		mapa[x+1][y] = '@';
+		m.matriz[x+1][y] = '@';
 		break;
 
 		// Caso a tecla 's' seja pressionada o simbolo '@' 'se desloca uma posição para a baixo.
 		case 'd':
-		mapa[x][y+1] = '@';
+		m.matriz[x][y+1] = '@';
 		break;
 
 	 }
 
 	 //imprime o ponto final na posoção iy
-	 mapa[x][y] = '.';
+	 m.matriz[x][y] = '.';
 
 }
 
