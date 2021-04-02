@@ -1,4 +1,2 @@
-
-
-int acabou();
 void move(char direcao);
+int acabou();

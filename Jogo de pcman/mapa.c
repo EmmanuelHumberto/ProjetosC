@@ -2,6 +2,25 @@
 #include<stdlib.h>
 #include"mapa.h"
 
+void encontramapa(MAPA* m, POSICAO* p, char c) {
+
+    for (int i = 0; i < m->linhas; i++){
+
+        for (int j = 0; j < m->colunas; j++){
+
+            if (m->matriz[i][j] == c) {
+                p->x = i;
+                p->y = j;
+                break;
+	
+            }
+
+        }
+    
+    }
+
+}
+
 /*
     Todas a funções abaixo recebem o mesmo agurmento (MAPA* m) 
       que é um ponteiro do tipo 'MAPA'.
@@ -10,8 +29,7 @@
 
 void liberamapa(MAPA* m){
 
-
- 	for (int i = 0; i < (*m).linhas; ++i){
+ 	for (int i = 0; i < (*m).linhas; i++){
      	/*Função free libera o espeçao de memoria aloacdo
      	   no ponteiro (*m).matriz na posição i
      	 */
@@ -84,7 +102,7 @@ void lemapa(MAPA* m){
 
 void imprimemapa(MAPA* m){
 
- 	for (int i = 0; i < 5; ++i){
+ 	for (int i = 0; i < 5; i++){
 
     	//imprime o mapa na posição i
      	printf("%s\n", m->matriz[i]);
