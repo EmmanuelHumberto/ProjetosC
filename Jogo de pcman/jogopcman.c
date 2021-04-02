@@ -67,35 +67,116 @@ void lemapa(){
 
  	 	alocamapa();
 
-
-    for (int i = 0; i < 5; ++i){
+ 	 	for (int i = 0; i < 5; ++i){
 
     	//lê o mapa na posição i
-     	fscanf(f, "%s", mapa[i]);
-
+     	fscanf(f, "%s", mapa[i]);	
+     	
      }
 
+
+    
       //Fechando Arquivo mapa.txt
      fclose(f);
 
  }
 
 
+void imprimemapa(){
+
+ 	for (int i = 0; i < 5; ++i){
+
+    	//imprime o mapa na posição i
+     	printf("%s\n", mapa[i]);
+
+     }
+
+}
 
 
+int acabou(){
+
+return 0;
+
+
+}
+
+void move(char direcao){
+
+	int x;
+	int y;
+
+	//Acha a posição do foge foge
+
+	for (int i = 0; i < linhas; i++){
+
+		for (int j = 0; j < colunas; j++){
+
+			if (mapa[i][j] == '@'){
+
+				x =i;
+				y=j;
+				break;
+
+			}
+
+		}
+	
+	}
+
+	/* Move o foge foge pelas teclas abaixo:
+
+	 *'a' esquerda
+	 *'w' direira 
+	 *'s' p/cima 
+	 *'d' p/baixo 
+
+	 */
+	switch(direcao){
+
+		// Caso a tecla 'a' seja pressionada o simbolo '@' 'se desloca uma posição para a esquerda.
+		case 'a':
+		mapa[x][y-1] = '@';
+		break;
+
+		// Caso a tecla 'd' seja pressionada o simbolo '@' 'se desloca uma posição para a direita.
+		case 'w':
+		mapa[x-1][y] = '@';
+		break;
+
+		// Caso a tecla 'w' seja pressionada o simbolo '@' 'se desloca uma posição para a cima.
+		case 's':
+		mapa[x+1][y] = '@';
+		break;
+
+		// Caso a tecla 's' seja pressionada o simbolo '@' 'se desloca uma posição para a baixo.
+		case 'd':
+		mapa[x][y+1] = '@';
+		break;
+
+	 }
+
+	 //imprime o ponto final na posoção iy
+	 mapa[x][y] = '.';
+
+}
 
 int main(){
 
 	lemapa();
 
-    for (int i = 0; i < 5; ++i)
+	do{
 
-    {
-    	//imprime o mapa na posição i
-     	printf("%s\n", mapa[i]);
+		imprimemapa();
+		char comando;
+		scanf(" %c", &comando);
+		move(comando);
 
-     }
-    
+
+
+	}while(!acabou());
+
+       
     liberamapa();
 
  return 0;
