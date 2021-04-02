@@ -9,10 +9,47 @@ char** mapa;
 int linhas;
 int colunas;
 
-int main()
-{
+void liberamapa(){
 
-	FILE* f;
+
+ 	for (int i = 0; i < linhas; ++i){
+     	/*Função free libera o espeçao de memoria aloacdo
+     	   em mapa na posição i
+     	 */
+     	free(mapa[i]);
+     	
+     }
+         /*Função free libera o espeçao de memoria aloacdo
+     	    para mapa
+     	  */
+     	free(mapa);
+
+ }
+
+void alocamapa(){
+
+ 	 /* função molloc resposavel pela alocação de memória.
+	  * função sizeof retorn a quantidade de bytes que o tipo declaro precisa.
+	  * Variavel mapa recebe dinamicamente a qte de bytes necessarios para guaradar 
+	  	 as linhas do ariovo mapa.txt.
+      */
+    mapa = malloc(sizeof(char*) * linhas);
+
+     //percorre a qte de linhas no aquivo mapa.txt.
+    for (int i =0; i < linhas;i++){
+
+     	/*mapa na posição i irá alocar espço suficiente para caber a qte de byte
+		   necessários para guardar ponteiros de char.
+     	 */
+     	mapa[i] = malloc(sizeof(char) * (colunas + 1));
+
+     }
+ }
+
+void lemapa(){
+
+
+ 	FILE* f;
     //Abrindo Arquivo 'r+' = leitura e escrita.
 	f = fopen("mapa.txt", "r");
 
@@ -23,39 +60,33 @@ int main()
 		exit(1);
      }
 
-     /*função para ler arquivos: 
-	  * [f = variavel que recebe o aquivo]
-	  */
-     fscanf(f, "%d %d", &linhas, &colunas);
+     	/*função para ler arquivos: 
+	 	 * [f = variavel que recebe o aquivo]
+	 	 */
+     	fscanf(f, "%d %d", &linhas, &colunas);
 
-     printf("linhas %d colunas %d\n", linhas, colunas);
-
-
-     /* função molloc resposavel pela alocação de memória.
-	  * função sizeof retorn a quantidade de bytes que o tipo declaro precisa.
-	  * Variavel mapa recebe dinamicamente a qte de bytes necessarios para guaradar 
-	  	 as linhas do ariovo mapa.txt.
-      */
-     mapa = malloc(sizeof(char*) * linhas);
-
-     //percorre a qte de linhas no aquivo mapa.txt.
-     for (int i =0; i < linhas;i++){
-
-     	/*mapa na posição i irá alocar espço suficiente para caber a qte de byte
-		   necessários para guardar ponteiros de char.
-     	 */
-     	mapa[i] = malloc(sizeof(char) * (colunas + 1));
-
-     }
+ 	 	alocamapa();
 
 
-    for (int i = 0; i < 5; ++i)
+    for (int i = 0; i < 5; ++i){
 
-    {
     	//lê o mapa na posição i
      	fscanf(f, "%s", mapa[i]);
 
      }
+
+      //Fechando Arquivo mapa.txt
+     fclose(f);
+
+ }
+
+
+
+
+
+int main(){
+
+	lemapa();
 
     for (int i = 0; i < 5; ++i)
 
@@ -64,25 +95,8 @@ int main()
      	printf("%s\n", mapa[i]);
 
      }
-
-     //Fechando Arquivo mapa.txt
-     fclose(f);
-
-
-     for (int i = 0; i < linhas; ++i)
-
-     {
-     	/*Função free libera o espeçao de memoria aloacdo
-     	   em mapa na posição i
-     	 */
-     	free(mapa[i]);
-     	
-     }
-         /*Função free libera o espeçao de memoria aloacdo
-     	    para mapa
-     	  */
-     free(mapa);
-     	
+    
+    liberamapa();
 
  return 0;
 }
