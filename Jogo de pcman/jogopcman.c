@@ -1,96 +1,13 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include"jogopcman.h"
-
-/*Declarando uma matrix de char. Os dois ** após o tipo da variável 
-  decalra um ponteiro de ponteiro para char.
- */
-
-struct mapa m;
-
-void liberamapa(){
+#include"mapa.h"
 
 
- 	for (int i = 0; i < m.linhas; ++i){
-     	/*Função free libera o espeçao de memoria aloacdo
-     	   em mapa na posição i
-     	 */
-     	free(m.matriz[i]);
-     	
-     }
-         /*Função free libera o espeçao de memoria aloacdo
-     	    para mapa
-     	  */
-     	free(m.matriz);
 
- }
+//Apelido para struct mapa. definida dentro de jogopcman.h
+MAPA m;
 
-void alocamapa(){
-
- 	 /* função molloc resposavel pela alocação de memória.
-	  * função sizeof retorn a quantidade de bytes que o tipo declaro precisa.
-	  * Variavel mapa recebe dinamicamente a qte de bytes necessarios para guaradar 
-	  	 as linhas do ariovo mapa.txt.
-      */
-    m.matriz = malloc(sizeof(char*) * m.linhas);
-
-     //percorre a qte de linhas no aquivo mapa.txt.
-    for (int i =0; i < m.linhas;i++){
-
-     	/*mapa na posição i irá alocar espço suficiente para caber a qte de byte
-		   necessários para guardar ponteiros de char.
-     	 */
-     	m.matriz[i] = malloc(sizeof(char) * (m.colunas + 1));
-
-     }
- }
-
-void lemapa(){
-
-
- 	FILE* f;
-    //Abrindo Arquivo 'r+' = leitura e escrita.
-	f = fopen("mapa.txt", "r");
-
-	//caso f != 0 imprimi numero de linhas e colunas 
-	if (f == 0){
-
-		printf("Erro de leitura no mapa\n");
-		exit(1);
-     }
-
-     	/*função para ler arquivos: 
-	 	 * [f = variavel que recebe o aquivo]
-	 	 */
-     	fscanf(f, "%d %d", &(m.linhas), &(m.colunas));
-
- 	 	alocamapa();
-
- 	 	for (int i = 0; i < 5; ++i){
-
-    	//lê o mapa na posição i
-     	fscanf(f, "%s", m.matriz[i]);	
-     	
-     }
-
-
-    
-      //Fechando Arquivo mapa.txt
-     fclose(f);
-
- }
-
-
-void imprimemapa(){
-
- 	for (int i = 0; i < 5; ++i){
-
-    	//imprime o mapa na posição i
-     	printf("%s\n", m.matriz[i]);
-
-     }
-
-}
 
 
 int acabou(){
@@ -105,7 +22,7 @@ void move(char direcao){
 	int x;
 	int y;
 
-	//Acha a posição do foge foge
+	//Acha a posição do foge foge no mapa
 
 	for (int i = 0; i < m.linhas; i++){
 
@@ -162,11 +79,11 @@ void move(char direcao){
 
 int main(){
 
-	lemapa();
+	lemapa(&m);
 
 	do{
 
-		imprimemapa();
+		imprimemapa(&m);
 		char comando;
 		scanf(" %c", &comando);
 		move(comando);
@@ -176,7 +93,7 @@ int main(){
 	}while(!acabou());
 
        
-    liberamapa();
+    liberamapa(&m);
 
  return 0;
 }
