@@ -1,13 +1,39 @@
 #include<stdio.h>
 #include<stdlib.h>
+#include<string.h>  
 #include"mapa.h"
 
+void copiamapa(MAPA* destino, MAPA* origem){
+
+    destino->linhas = origem->linhas;
+    destino->colunas = origem->colunas;
+
+    alocamapa(destino);
+
+    for (int i = 0; i < origem->linhas; i++) {
+
+        for (int j= 0; j < origem->colunas; j++) {
+
+            /*strcpy ccopia o valor da string na segunda posição do argumento para 
+                uma variável string na primeira posição. O segundo argumento pode ser uma variável, 
+                uma expressão string ou um valor literal string contido entre aspas
+            */
+            strcpy(destino->matriz[i], origem->matriz[i]);
+          
+        }
+        
+    }
+   
+}
+
+
+ 
 void andandonomapa(MAPA* m, int xorigem, int yorigem, int xdestino, int ydestino){
 
     char personagem = m->matriz[xorigem][yorigem];
     m->matriz[xdestino][ydestino] = personagem;
-    m->matriz[xorigem][yorigem] = '.';
-}
+    m->matriz[xorigem][yorigem] = VAZIO;
+ }
 
 
 int ehvalida(MAPA* m, int x, int y) {
@@ -26,13 +52,13 @@ int ehvalida(MAPA* m, int x, int y) {
 
 int ehvazia(MAPA* m, int x, int y) {
 
-    return m->matriz[x][y] == '.';
+    return m->matriz[x][y] == VAZIO;
 
 }
     
 
 
-void encontramapa(MAPA* m, POSICAO* p, char c) {
+int encontramapa(MAPA* m, POSICAO* p, char c) {
 
     for (int i = 0; i < m->linhas; i++){
 
@@ -41,7 +67,7 @@ void encontramapa(MAPA* m, POSICAO* p, char c) {
             if (m->matriz[i][j] == c) {
                 p->x = i;
                 p->y = j;
-                break;
+                return 1;
 	
             }
 
@@ -49,7 +75,16 @@ void encontramapa(MAPA* m, POSICAO* p, char c) {
     
     }
 
+    return 0;
+
 }
+
+int podeandar(MAPA *m, int x, int y){
+
+    return 
+         ehvalida(m, x, y) && ehvazia(m, x, y);  
+
+ }
 
 /*
     Todas a funções abaixo recebem o mesmo agurmento (MAPA* m) 
@@ -60,7 +95,7 @@ void encontramapa(MAPA* m, POSICAO* p, char c) {
 void liberamapa(MAPA* m){
 
  	for (int i = 0; i < (*m).linhas; i++){
-     	/*Função free libera o espeçao de memoria aloacdo
+     	/*Função free libera o espeçao de memoria alocadodo
      	   no ponteiro (*m).matriz na posição i
      	 */
      	free(m->matriz[i]);
@@ -77,7 +112,7 @@ void liberamapa(MAPA* m){
 void alocamapa(MAPA* m){
 
  	 /* função molloc resposavel pela alocação de memória.
-	  * função sizeof retorn a quantidade de bytes que o tipo declarado precisa.
+	  * função sizeof retorna a quantidade de bytes que o tipo declarado precisa.
 	  * Variavel (*m).matriz recebe dinamicamente a qte de bytes necessarios para guaradar 
 	  	 as linhas do arquivo mapa.txt.
       */
