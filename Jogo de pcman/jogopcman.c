@@ -15,15 +15,27 @@ int acabou() {
 
  }
 
+ int ehdirecao(char direcao){
+
+ 	return direcao == ESQUERDA ||
+		direcao == DIREITA ||
+		direcao == CIMA ||
+		direcao == BAIXO;
+
+ }
+
 void move(char direcao) {
 
-	int x;
-	int y;
 
-	//imprime o ponto final na posoção iy.
-	m.matriz[comedor.x][comedor.y] = '.';
+	//trantando dados de entarda.
+	if (!ehdirecao(direcao))
 
-	 /* Move o foge foge pelas teclas abaixo:
+		return;
+
+	int proximox = comedor.x;
+	int proximoy = comedor.y;
+
+	/* Move o foge foge pelas teclas abaixo:
 	 *'a' esquerda.
 	 *'w' direita.
 	 *'s' p/cima. 
@@ -33,29 +45,35 @@ void move(char direcao) {
 	switch(direcao){
 
 		// Caso a tecla 'a' seja pressionada o simbolo '@' 'se desloca uma posição para a esquerda.
-		case 'a':
-		m.matriz[comedor.x][comedor.y-1] = '@';
-		comedor.y--;
+		case ESQUERDA:
+		proximoy--;
 		break;
 
 		// Caso a tecla 'd' seja pressionada o simbolo '@' 'se desloca uma posição para a direita.
-		case 'w':
-		m.matriz[comedor.x-1][comedor.y] = '@';
-		comedor.x--;
+		case CIMA:
+		proximox--;
 		break;
 
 		// Caso a tecla 'w' seja pressionada o simbolo '@' 'se desloca uma posição para a cima.
-		case 's':
-		m.matriz[comedor.x+1][comedor.y] = '@';
-		comedor.x++;
+		case BAIXO:
+		proximox++;
 		break;
 
 		// Caso a tecla 's' seja pressionada o simbolo '@' 'se desloca uma posição para a baixo.
-		case 'd':
-		m.matriz[comedor.x][comedor.y+1] = '@';
-		comedor.y++;
+		case DIREITA:
+		proximoy++;
+		break;
 	 }
 
+	if(!ehvalida(&m , proximox, proximoy))
+		return;
+	if(!ehvazia(&m, proximox, proximoy))
+	 	return;
+
+	andandonomapa(&m, comedor.x, comedor.y, proximox, proximoy);
+
+		comedor.x = proximox;
+		comedor.y = proximoy;
  } 
 	 
 int main() {
@@ -63,7 +81,7 @@ int main() {
 	lemapa(&m);
 
 	//recebe o mapa e qurda a posicão do comedor @.
-	encontramapa(&m, &comedor, '@');
+	encontramapa(&m, &comedor, COMEDOR);
 
 	do{
 
