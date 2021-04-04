@@ -44,4 +44,6 @@ int encontramapa(MAPA* m, POSICAO* p, char c);
 int ehvalida(MAPA* m, int x, int y);
 int ehvazia(MAPA* m, int x, int y);
 int caminhofantasma(int xatual, int yatual, int* xdestino, int* ydestino);
-int podeandar(MAPA *m, int x, int y);
+int podeandar(MAPA *m,char personagem, int x, int y);
+int ehparede(MAPA* m, int x, int y);
+int ehpersonagem(MAPA* m, char personagem, int x, int y);

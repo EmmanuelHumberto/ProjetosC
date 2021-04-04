@@ -79,10 +79,22 @@ int encontramapa(MAPA* m, POSICAO* p, char c) {
 
 }
 
-int podeandar(MAPA *m, int x, int y){
+int ehparede(MAPA* m, int x, int y){
+
+    return m->matriz[x][y] == PAREDE_VERT ||  m->matriz[x][y] == PAREDE_HOR;
+}
+
+int podeandar(MAPA *m,char personagem, int x, int y){
 
     return 
-         ehvalida(m, x, y) && ehvazia(m, x, y);  
+         ehvalida(m, x, y) && !ehparede(m, x, y) && !ehpersonagem(m, personagem, x, y);  
+
+ }
+
+ int ehpersonagem(MAPA* m, char personagem, int x, int y){
+
+    return m->matriz[x][y] == personagem;
+
 
  }
 

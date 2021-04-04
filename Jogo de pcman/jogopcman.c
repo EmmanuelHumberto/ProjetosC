@@ -25,7 +25,7 @@ int caminhofantasma(int xatual, int yatual, int* xdestino, int* ydestino){
 	for(int i = 0; i < 10; i++) {
 		int posicao = rand() % 4;
 
-		if(podeandar(&m, opcoes[posicao][0], opcoes[posicao][1])){
+		if(podeandar(&m,  GELEIA_FANTASMA, opcoes[posicao][0], opcoes[posicao][1])){
 		
 			*xdestino = opcoes[posicao][0];
 			*ydestino = opcoes[posicao][1];
@@ -128,7 +128,7 @@ void move(char direcao) {
 		break;
 	 }
 
-	if(!podeandar(&m , proximox, proximoy))
+	if(!podeandar(&m , COMEDOR, proximox, proximoy))
 		return;
 	
 
