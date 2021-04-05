@@ -131,7 +131,7 @@ void alocamapa(MAPA* m){
     m->matriz = malloc(sizeof(char*) * m->linhas);
 
     //percorre a qte de linhas no aquivo mapa.txt.
-    for (int i =0; i < m->linhas;i++){
+    for (int i = 0; i < m->linhas;i++){
 
      	/*m.matriz na posição i irá alocar espço suficiente para caber a qte de byte
 		   necessários para guardar ponteiros de char.
@@ -141,9 +141,13 @@ void alocamapa(MAPA* m){
      }
  }
 
+/* Função Lemapa resposavel por abrir o aquivo que contem o mapa
+    e le o seu conteudo, linhas e colunas e aloca seu conteudo na variavel n
+    utilizando a função alocapama
+ */
 void lemapa(MAPA* m){
 
-
+    //Definindo variavel ponteiro de f que irá receber o arquivo a ser aberto
  	FILE* f;
     //Abrindo Arquivo 'r+' = leitura e escrita.
 	f = fopen("mapa.txt", "r");
@@ -151,8 +155,11 @@ void lemapa(MAPA* m){
 	//caso f != 0 imprimi numero de linhas e colunas 
 	if (f == 0){
 
+        //caso o retorno de if seja zero a mensagem  de erro abaixo é impressa.
 		printf("Erro de leitura no mapa\n");
-		exit(1);
+		
+        //Sai do programa
+        exit(1);
      }
 
      	/*função para ler arquivos: 

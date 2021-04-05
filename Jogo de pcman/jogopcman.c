@@ -1,3 +1,4 @@
+//Bibliotecas 
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
@@ -6,15 +7,30 @@
 #include"mapa.h"
 
 
-//Apelido para struct mapa. definida dentro de jogopcman.h.
+/* Apelido para struct mapa. definida dentro de jogopcman.h.
+ * declarando uma variavel m do tipo MAPA: A variaavel do tipo mapa 
+ 	é uma variaavel do tipo struturada, um Array, que recebe um array
+ 	multidimensional (uma matriz) e duas variavel do tipo inteiro. 
+ 	Isso é uma variavel do Tipo MAPA, recebe um papa bidmensional e duas coordenadas
+ 	para que, com isso possa ser definido uma posição no mapa.
+
+ */
 MAPA m;
 
+/* Declarando uma variável comedor do tipo posição: 
+	variável do tipo estruturado que recebe dois inteiros 
+	para posição cordenada x e cordenada Y.
+
+ */
 POSICAO	comedor;
+
+int tempilula = 0;
+
 
 int caminhofantasma(int xatual, int yatual, int* xdestino, int* ydestino){
 
 	int opcoes[4][2] = {
-		{xatual, yatual +1},
+		{xatual, yatual + 1},
 		{xatual + 1, yatual},
 		{xatual, yatual - 1},
 		{xatual - 1, yatual}
@@ -130,13 +146,25 @@ void move(char direcao) {
 
 	if(!podeandar(&m , COMEDOR, proximox, proximoy))
 		return;
-	
+
+	if (ehpersonagem(&m, PILULA, proximox, proximoy)){
+
+		tempilula = 1;
+
+	}
+
+
 
 	andandonomapa(&m, comedor.x, comedor.y, proximox, proximoy);
 
 		comedor.x = proximox;
 		comedor.y = proximoy;
  } 
+
+ void explodepilula(){
+
+ 	printf("Explodiu!\n");
+ }
 	 
 int main() {
 
@@ -147,11 +175,16 @@ int main() {
 
 	do{
 
+		printf("Tem pililula: %s\n", (tempilula ? "SIM":"NAO"));
+
 		imprimemapa(&m);
 
 		char comando;
 		scanf(" %c", &comando);
 		move(comando);
+
+		if(comando == BOMBA) explodepilula();
+
 		fantasmas();
 
 

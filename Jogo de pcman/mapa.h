@@ -3,6 +3,7 @@
 #define VAZIO '.'
 #define PAREDE_VERT '|'
 #define PAREDE_HOR '-'
+#define PILULA 'p'
 
 
 /*função struct: permite agrupar uma "coleção" de variáveis do "tipo" Mapa.
@@ -17,7 +18,7 @@ struct mapa{
     int linhas;
     int colunas;
 };
-
+//define um "apelido" para a variável declarada
 typedef struct mapa MAPA;
 
 
@@ -47,3 +48,4 @@ int caminhofantasma(int xatual, int yatual, int* xdestino, int* ydestino);
 int podeandar(MAPA *m,char personagem, int x, int y);
 int ehparede(MAPA* m, int x, int y);
 int ehpersonagem(MAPA* m, char personagem, int x, int y);
+ void explodepilula();
