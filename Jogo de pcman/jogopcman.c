@@ -161,24 +161,19 @@ void move(char direcao) {
 		comedor.y = proximoy;
  } 
 
- void explodepilula(){
+ void explodepilula(int x, int y, int qte){
 
- 	for (int i = 1; i <= 3; i++){
- 		if(ehvalida(&m, comedor.x, comedor.y+1)){
+ 	if (qte == 0)return;
 
- 			if(ehparede(&m, comedor.x, comedor.y+1)){
- 				break;
- 			}
+ 	 m.matriz[x][y+1] = VAZIO;
+ 	 explodepilula(x, y+1, qte - 1);
 
- 			m.matriz[comedor.x][comedor.y+1] = VAZIO;
-
- 	     }
+ 	     
  		
- 	 }
+ 	 
 
- 	printf("Explodiu!\n");
- }
-	 
+ }	
+
 int main() {
 
 	lemapa(&m);
@@ -196,7 +191,7 @@ int main() {
 		scanf(" %c", &comando);
 		move(comando);
 
-		if(comando == BOMBA) explodepilula();
+		if(comando == BOMBA) explodepilula(	comedor.x, comedor.y, 3);
 
 		fantasmas();
 

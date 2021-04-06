@@ -131,7 +131,7 @@ void alocamapa(MAPA* m){
     m->matriz = malloc(sizeof(char*) * m->linhas);
 
     //percorre a qte de linhas no aquivo mapa.txt.
-    for (int i = 0; i < m->linhas;i++){
+    for (int i = 0; i < m->linhas; i++){
 
      	/*m.matriz na posição i irá alocar espço suficiente para caber a qte de byte
 		   necessários para guardar ponteiros de char.

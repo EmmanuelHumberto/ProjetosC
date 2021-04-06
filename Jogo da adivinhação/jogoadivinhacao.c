@@ -1,4 +1,4 @@
-    #include<stdio.h>
+#include<stdio.h>
 #include<stdlib.h>
 #include<time.h>
 
@@ -9,7 +9,7 @@ void cabecalhoBV(){
 
 	printf("\n");
 	printf("**************************************************\n");
-	printf("*  Seja bem vindo! Ao nosso jogo de Adivinhacao! *\n");
+	printf("*  Seja bem vindo! Ao nosso jogo da Adivinhacao! *\n");
    	printf("**************************************************\n");
    	printf("\n");
 
@@ -49,14 +49,14 @@ void cabecalhoacerto(){
 
 	//Imprime o cabeçalho de vitória
 
-    	printf("\n\n");
+    printf("\n\n");
 	printf("***************************\n");
 	printf("✅ ");
 	printf(" Parabens você ganhou! *\n");
-    	printf("***************************\n");
-   	 printf("\n");
+    printf("***************************\n");
+   	printf("\n");
 
-	printf("   ☆┌─┐　─┐☆           \n");
+	printf("   ☆┌─┐　─┐☆          \n");
 	printf("  　│▒│ /▒/           \n");
 	printf("  　│▒│/▒/            \n");
 	printf("  　│▒ /▒/─┬─┐        \n");
@@ -66,6 +66,34 @@ void cabecalhoacerto(){
 	printf("  └┐▒▒▒▒▒▒┌┘          \n");
 	printf("  　└┐▒▒▒▒┌┘       ☭  \n");
 	printf("                      \n");
+
+}
+
+void cabecalhofim(){
+
+
+    printf("                              \n");
+    printf(" ███▀░░░░░░░░░░░░░░░░░▀████   \n");
+    printf(" ███│░░░░░░░░░░░░░░░░░░░│███  \n");
+    printf(" ██▌│░░░░░░░░░░░░░░░░░░░│▐██  \n");
+    printf(" ██░└┐░░░░░░░░░░░░░░░░░┌┘░██  \n");
+    printf(" ██░░└┐░░░░░░░░░░░░░░░┌┘░░██  \n");
+    printf(" ██░░┌┘▄▄▄▄▄░░░░░▄▄▄▄▄└┐░░██  \n");
+    printf(" ██▌░│██████▌░░░▐██☭ ███│ ██\n");
+    printf(" ███░│▐███▀▀░░▄░░▀▀███▌│░███  \n");
+    printf(" ██▀─┘░░░░░░░▐█▌░░░░░░░└─▀██  \n");
+    printf(" ██▄░░░▄▄▄▓░░▀█▀░░▓▄▄▄░░░▄██  \n");
+    printf(" ████▄─┘██▌░░░░░░░▐██└─▄████  \n");
+    printf(" █████░░▐█─┬┬┬┬┬┬┬─█▌░░█████  \n");
+    printf(" ████▌░░░▀┬┼┼┼┼┼┼┼┬▀░░░▐████  \n");
+    printf(" █████▄░░░└┴┴┴┴┴┴┴┘░░░▄█████  \n");
+    printf(" ███████▄░░░░░░░░░░░▄███████  \n");
+    printf("                              \n");
+
+
+
+    printf("Você perdeu! Tente de novo!\n");
+
 
 }
 
@@ -197,27 +225,7 @@ int main(){
 
     } else {
 
-    printf("                              \n");
-	printf(" ███▀░░░░░░░░░░░░░░░░░▀████   \n");
-	printf(" ███│░░░░░░░░░░░░░░░░░░░│███  \n");
-	printf(" ██▌│░░░░░░░░░░░░░░░░░░░│▐██  \n");
-	printf(" ██░└┐░░░░░░░░░░░░░░░░░┌┘░██  \n");
-	printf(" ██░░└┐░░░░░░░░░░░░░░░┌┘░░██  \n");
-	printf(" ██░░┌┘▄▄▄▄▄░░░░░▄▄▄▄▄└┐░░██  \n");
-	printf(" ██▌░│██████▌░░░▐██☭ ███│ ██\n");
-	printf(" ███░│▐███▀▀░░▄░░▀▀███▌│░███  \n");
-	printf(" ██▀─┘░░░░░░░▐█▌░░░░░░░└─▀██  \n");
-	printf(" ██▄░░░▄▄▄▓░░▀█▀░░▓▄▄▄░░░▄██  \n");
-	printf(" ████▄─┘██▌░░░░░░░▐██└─▄████  \n");
-	printf(" █████░░▐█─┬┬┬┬┬┬┬─█▌░░█████  \n");
-	printf(" ████▌░░░▀┬┼┼┼┼┼┼┼┬▀░░░▐████  \n");
-	printf(" █████▄░░░└┴┴┴┴┴┴┴┘░░░▄█████  \n");
-	printf(" ███████▄░░░░░░░░░░░▄███████  \n");
-	printf("                              \n");
-
-
-
-    printf("Você perdeu! Tente de novo!\n");
+     cabecalhofim()
 
     }
 
