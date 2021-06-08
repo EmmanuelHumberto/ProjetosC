@@ -1,9 +1,9 @@
 #define COMEDOR '@'
-#define GELEIA_FANTASMA 'f'
+#define GELEIA_FANTASMA 'Z'
 #define VAZIO '.'
 #define PAREDE_VERT '|'
 #define PAREDE_HOR '-'
-#define PILULA 'p'
+#define PILULA 'P'
 
 
 /*função struct: permite agrupar uma "coleção" de variáveis do "tipo" Mapa.

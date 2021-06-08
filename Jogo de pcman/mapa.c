@@ -169,9 +169,9 @@ void lemapa(MAPA* m){
 
  	 	alocamapa(m);
 
- 	 	for (int i = 0; i < 5; ++i){
+ 	 	for (int i = 0; i < 11; ++i){
 
-    	//lê o mapa na posição i
+    	//lê o mapa na posição 
      	fscanf(f, "%s", m->matriz[i]);	
      	
      }
@@ -186,7 +186,7 @@ void lemapa(MAPA* m){
 
 void imprimemapa(MAPA* m){
 
- 	for (int i = 0; i < 5; i++){
+ 	for (int i = 0; i < 11; i++){
 
     	//imprime o mapa na posição i
      	printf("%s\n", m->matriz[i]);
